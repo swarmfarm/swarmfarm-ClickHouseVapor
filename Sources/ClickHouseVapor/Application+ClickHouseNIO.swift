@@ -40,6 +40,7 @@ public struct ClickHousePoolConfiguration {
         user: String? = nil,
         password: String? = nil,
         database: String? = nil,
+        secure: Bool = false,
         maxConnectionsPerEventLoop: Int = 1,
         requestTimeout: TimeAmount = .seconds(10)
     ) throws {
@@ -48,7 +49,8 @@ public struct ClickHousePoolConfiguration {
             port: port,
             user: user,
             password: password,
-            database: database
+            database: database,
+            tlsConfiguration: secure ? .clientDefault : nil
         )
         self.maxConnectionsPerEventLoop = maxConnectionsPerEventLoop
         self.requestTimeout = requestTimeout
